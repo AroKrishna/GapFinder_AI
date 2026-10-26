@@ -139,10 +139,10 @@ describe("Security: Prompt Injection & RAG Grounding", () => {
   });
 });
 
-describe("Security: Evaluator Demo Account Configuration", () => {
-  it("provides valid and expected demo credentials", () => {
-    expect(DEMO_CREDENTIALS.email).toBe("evaluator@gapfinder.demo");
-    expect(DEMO_CREDENTIALS.password).toBe("GapFinder-Demo-2026!");
+describe("Security: Demo Account Configuration", () => {
+  it("provides valid and expected admin-style demo credentials", () => {
+    expect(DEMO_CREDENTIALS.email).toBe("admin@gapfinder.demo");
+    expect(DEMO_CREDENTIALS.password).toBe("GapFinder-Admin-2026!");
     expect(DEMO_CREDENTIALS.displayName).toBeTruthy();
     expect(DEMO_CREDENTIALS.workspaceName).toBeTruthy();
     expect(DEMO_CREDENTIALS.hoursPerDay).toBeGreaterThan(0);

@@ -20,9 +20,9 @@ const admin = createClient(url, serviceKey, {
   auth: { persistSession: false, autoRefreshToken: false },
 });
 
-console.log(`[demo-provision] Provisioning evaluator demo account: ${DEMO_CREDENTIALS.email}...`);
+console.log(`[demo-provision] Provisioning demo account: ${DEMO_CREDENTIALS.email}...`);
 
-// 1. Check if user already exists
+// 1. Check if user already exists (or migrate from legacy evaluator demo account)
 const { data: listData, error: listError } = await admin.auth.admin.listUsers({ perPage: 1000 });
 if (listError) {
   console.error("[demo-provision] Error listing users:", listError.message);
@@ -30,6 +30,23 @@ if (listError) {
 }
 
 let user = listData.users.find((u) => u.email?.toLowerCase() === DEMO_CREDENTIALS.email.toLowerCase());
+const legacyUser = listData.users.find((u) => u.email?.toLowerCase() === "evaluator@gapfinder.demo");
+
+if (!user && legacyUser) {
+  // Seamlessly migrate legacy evaluator account so existing workspace, documents, and embeddings are preserved
+  const { data: migData, error: migError } = await admin.auth.admin.updateUserById(legacyUser.id, {
+    email: DEMO_CREDENTIALS.email,
+    password: DEMO_CREDENTIALS.password,
+    email_confirm: true,
+    user_metadata: { display_name: DEMO_CREDENTIALS.displayName },
+  });
+  if (migError) {
+    console.warn("[demo-provision] Could not rename legacy user, will create fresh admin user:", migError.message);
+  } else {
+    user = migData.user;
+    console.log(`✓ Successfully migrated legacy evaluator demo account to ${DEMO_CREDENTIALS.email} (User ID: ${user.id})`);
+  }
+}
 
 if (user) {
   const { error: updateError } = await admin.auth.admin.updateUserById(user.id, {
@@ -41,7 +58,7 @@ if (user) {
     console.error("[demo-provision] Failed to update demo user password:", updateError.message);
     process.exit(1);
   }
-  console.log(`✓ Existing user updated and verified (User ID: ${user.id})`);
+  console.log(`✓ Demo user verified and credentials updated (User ID: ${user.id})`);
 } else {
   const { data: createData, error: createError } = await admin.auth.admin.createUser({
     email: DEMO_CREDENTIALS.email,
@@ -634,7 +651,7 @@ if (!readyQuizzes || readyQuizzes.length === 0) {
 
 // 9. Verification summary
 console.log("\n=======================================================");
-console.log(" Evaluator Demo Account Successfully Provisioned");
+console.log(" Demo Admin Account Successfully Provisioned");
 console.log("=======================================================");
 console.log(` Email:      ${DEMO_CREDENTIALS.email}`);
 console.log(` Password:   ${DEMO_CREDENTIALS.password}`);

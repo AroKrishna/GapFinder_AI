@@ -1,6 +1,7 @@
 import { ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 import { BackLink } from "@/components/back-link";
+import { ThemeSelector } from "@/components/theme-selector";
 import { Card, PageHeader } from "@/components/ui/primitives";
 import { requirePageUser } from "@/lib/services/auth";
 import { getDisplayName } from "@/lib/services/profile";
@@ -22,7 +23,16 @@ export default async function AccountPage() {
         <Row label="Full Name" value={name} />
         <Row label="Email Address" value={email ?? "—"} />
       </Card>
-      <Card className="mt-4 flex gap-3 p-5">
+
+      <div className="mt-6">
+        <h2 className="mb-1 text-sm font-semibold text-ink">Appearance &amp; Theme</h2>
+        <p className="mb-3 text-xs text-muted">
+          Choose how GapFinder AI looks. Select a light or dark theme, or sync automatically with your system settings.
+        </p>
+        <ThemeSelector />
+      </div>
+
+      <Card className="mt-6 flex gap-3 p-5">
         <ShieldCheck className="mt-0.5 size-5 shrink-0 text-[#16845B]" aria-hidden />
         <p className="text-xs leading-relaxed text-muted">
           <span className="font-semibold text-ink">Private &amp; isolated workspace.</span> Your study materials, quiz attempts, and learning gap analyses are restricted strictly to your account using row-level security and private storage buckets.

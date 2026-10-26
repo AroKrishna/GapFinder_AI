@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Copy, Eye, EyeOff, Loader2, Sparkles } from "lucide-react";
+import { Check, Copy, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -123,8 +123,8 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         <div className="mt-5 rounded-lg border border-brand-border/90 bg-brand-soft/40 p-3.5 text-xs">
           <div className="flex items-center justify-between pb-2 border-b border-brand-border/60">
             <span className="font-semibold text-foreground flex items-center gap-1.5">
-              <Sparkles className="size-3.5 text-brand" />
-              Demo credentials
+              <ShieldCheck className="size-3.5 text-brand" />
+              Demo Admin Access
             </span>
             <button
               type="button"

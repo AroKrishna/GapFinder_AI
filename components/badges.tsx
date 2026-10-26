@@ -13,10 +13,10 @@ import { Badge } from "./ui/primitives";
  * Status is never communicated by color alone.
  */
 export const MASTERY_META: Record<MasteryState, { label: string; cls: string; dot: string; hex: string; bar: string }> = {
-  weak: { label: "Needs practice", cls: "bg-[#FFF0F0] text-[#C34848] border-[#FCDADA]", dot: "bg-[#C34848]", hex: "#C34848", bar: "bg-[#C34848]" },
-  developing: { label: "Developing", cls: "bg-[#FFF5DE] text-[#A66A0A] border-[#FCE8BD]", dot: "bg-[#A66A0A]", hex: "#A66A0A", bar: "bg-[#A66A0A]" },
-  strong: { label: "Strong", cls: "bg-[#EAF7F0] text-[#16845B] border-[#C8EED9]", dot: "bg-[#16845B]", hex: "#16845B", bar: "bg-[#16845B]" },
-  not_assessed: { label: "Not assessed", cls: "bg-[#F1F5F9] text-[#64748B] border-[#E2E8F0]", dot: "bg-[#94A3B8]", hex: "#64748B", bar: "bg-[#94A3B8]" },
+  weak: { label: "Needs practice", cls: "bg-weak-soft text-weak border-weak/30", dot: "bg-weak", hex: "var(--color-weak)", bar: "bg-weak" },
+  developing: { label: "Developing", cls: "bg-developing-soft text-developing border-developing/30", dot: "bg-developing", hex: "var(--color-developing)", bar: "bg-developing" },
+  strong: { label: "Strong", cls: "bg-strong-soft text-strong border-strong/30", dot: "bg-strong", hex: "var(--color-strong)", bar: "bg-strong" },
+  not_assessed: { label: "Not assessed", cls: "bg-unassessed-soft text-unassessed border-border", dot: "bg-unassessed", hex: "var(--color-unassessed)", bar: "bg-unassessed" },
 };
 
 const ICONS: Record<MasteryState, typeof AlertTriangle> = {
@@ -53,8 +53,8 @@ export function StatusPill({ status }: { status: DocStatus }) {
   const map = {
     pending: { cls: "bg-subtle text-muted border-border", label: "Waiting", icon: CircleDashed },
     processing: { cls: "bg-brand-soft text-brand-strong border-brand-border", label: "Processing", icon: Loader2 },
-    ready: { cls: "bg-[#EAF7F0] text-[#16845B] border-[#C8EED9]", label: "Ready", icon: CheckCircle2 },
-    failed: { cls: "bg-[#FFF0F0] text-[#C34848] border-[#FCDADA]", label: "Needs attention", icon: XCircle },
+    ready: { cls: "bg-strong-soft text-strong border-strong/30", label: "Ready", icon: CheckCircle2 },
+    failed: { cls: "bg-weak-soft text-weak border-weak/30", label: "Needs attention", icon: XCircle },
   }[status];
   const Icon = map.icon;
   return (

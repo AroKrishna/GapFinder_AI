@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { Toaster } from "sonner";
 import { GlowTracker } from "@/components/glow";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -12,13 +13,20 @@ export const metadata: Metadata = {
   description: "Find your gaps. Focus your learning. Improve with evidence.",
 };
 
+const antiFlickerScript = `(function(){try{var t=localStorage.getItem("gapfinder-theme");var d=window.matchMedia("(prefers-color-scheme: dark)").matches;var isDark=t==="dark"||((!t||t==="system")&&d);if(isDark){document.documentElement.classList.add("dark");document.documentElement.setAttribute("data-theme","dark");}else{document.documentElement.classList.remove("dark");document.documentElement.setAttribute("data-theme","light");}}catch(e){}})();`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${inter.variable} ${jakarta.variable} h-full`}>
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jakarta.variable} h-full`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: antiFlickerScript }} />
+      </head>
       <body className="min-h-full flex flex-col">
-        {children}
-        <GlowTracker />
-        <Toaster richColors position="top-right" toastOptions={{ style: { borderRadius: "0.875rem" } }} />
+        <ThemeProvider>
+          {children}
+          <GlowTracker />
+          <Toaster richColors position="top-right" toastOptions={{ style: { borderRadius: "0.875rem" } }} />
+        </ThemeProvider>
       </body>
     </html>
   );

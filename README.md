@@ -64,12 +64,12 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-### 5. Evaluator Demo Account
+### 5. Demo Admin Account
 
-A dedicated demo account is pre-configured for evaluators to test the full product without waiting for document processing:
+A dedicated demo account is pre-configured with admin-style access for evaluators to test the full product without waiting for document processing:
 
-- **Email:** `evaluator@gapfinder.demo`
-- **Password:** `GapFinder-Demo-2026!`
+- **Email:** `admin@gapfinder.demo`
+- **Password:** `GapFinder-Admin-2026!`
 - **Workspace:** `Operating Systems — End Semester Prep` (3 documents indexed, 21 chunks with 768-d vector embeddings, 7 topics, active revision plan, ready diagnostic quiz)
 
 To safely provision or refresh this account at any time:

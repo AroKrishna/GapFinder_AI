@@ -1,9 +1,9 @@
 {
-  "email": "evaluator@gapfinder.demo",
-  "password": "GapFinder-Demo-2026!",
-  "displayName": "Evaluator",
+  "email": "admin@gapfinder.demo",
+  "password": "GapFinder-Admin-2026!",
+  "displayName": "Demo Admin",
   "workspaceName": "Operating Systems — End Semester Prep",
-  "subject": "CS 301 · Core Systems & Concurrency",
+  "subject": "Operating Systems — Units 2 to 4",
   "hoursPerDay": 2,
-  "examInDays": 14
+  "examInDays": 10
 }

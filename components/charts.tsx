@@ -2,11 +2,11 @@
 
 import { CartesianGrid, LabelList, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
-const INK = "#172B4D";
-const MUTED = "#52627A";
-const GRID = "#EDF1F6";
-const SURFACE = "#FFFFFF";
-const LINE = "#315FE8";
+const INK = "var(--color-ink, #172B4D)";
+const MUTED = "var(--color-muted, #52627A)";
+const GRID = "var(--color-divider, #EDF1F6)";
+const SURFACE = "var(--color-surface, #FFFFFF)";
+const LINE = "var(--color-brand, #315FE8)";
 
 export interface ScorePoint {
   label: string;

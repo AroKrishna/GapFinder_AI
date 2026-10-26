@@ -9,9 +9,9 @@ export interface DemoCredentials {
 }
 
 export const DEMO_CREDENTIALS: DemoCredentials = {
-  email: "evaluator@gapfinder.demo",
-  password: "GapFinder-Demo-2026!",
-  displayName: "Evaluator Demo",
+  email: "admin@gapfinder.demo",
+  password: "GapFinder-Admin-2026!",
+  displayName: "Demo Admin",
   workspaceName: "Operating Systems — End Semester Prep",
   subject: "Operating Systems — Units 2 to 4",
   hoursPerDay: 2,

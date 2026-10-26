@@ -1,5 +1,6 @@
 import { LogOut, Settings } from "lucide-react";
 import Link from "next/link";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 function initials(name: string) {
@@ -17,7 +18,7 @@ export function Avatar({ name, className }: { name: string; className?: string }
 /** Account row: name, settings link, sign out (a real POST form, works without JS). */
 export function AccountMenu({ name, email, compact }: { name: string; email: string | null; compact?: boolean }) {
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex items-center gap-1.5">
       <Avatar name={name} />
       {!compact && (
         <div className="min-w-0 flex-1">
@@ -25,6 +26,7 @@ export function AccountMenu({ name, email, compact }: { name: string; email: str
           {email && <div className="truncate text-xs text-muted">{email}</div>}
         </div>
       )}
+      <ThemeToggle className="size-8 border-none bg-transparent p-1.5 text-muted hover:bg-subtle hover:text-ink" />
       <Link href="/settings" className="rounded-lg p-2 text-muted hover:bg-subtle hover:text-ink transition-colors" aria-label="Account settings" title="Account settings">
         <Settings className="size-4" />
       </Link>
