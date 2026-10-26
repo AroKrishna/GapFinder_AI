@@ -1,19 +1,41 @@
 {
-  "name": "gf-tmp",
+  "name": "gapfinder-ai",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:db": "node tests/db/rls-and-schema.mjs",
+    "verify:setup": "node --env-file=.env.local scripts/verify-setup.mjs",
+    "provision:demo": "node --env-file=.env.local scripts/provision-demo-account.mjs",
+    "test:demo-journey": "node --env-file=.env.local scripts/evaluator-journey.mjs",
+    "test:e2e": "node --env-file=.env.local scripts/e2e-api.mjs"
   },
   "dependencies": {
+    "@google/genai": "^2.31.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.61.0",
     "next": "16.4.3",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "recharts": "^3.10.1",
+    "server-only": "^0.0.1",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "^3.7.0",
+    "unpdf": "^1.9.1",
+    "zod": "^4.6.7"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.11",
+    "@electric-sql/pglite-pgvector": "^0.0.12",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -21,6 +43,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.4.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.12"
   }
 }

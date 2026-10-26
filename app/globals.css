@@ -1,26 +1,192 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
+/* ==========================================================================
+   GapFinder design system — Modern Academic Minimalism.
+   Clean, structured, readable, calm, precise, and professional.
+   Predominantly neutral surfaces (85-90%) with restrained cobalt blue accents
+   and semantic learning-status colors.
+   ========================================================================== */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Main surfaces */
+  --color-bg: #f7f9fc;
+  --color-surface: #ffffff;
+  --color-subtle: #f1f5f9;
+  --color-input: #ffffff;
+
+  /* Typography */
+  --color-ink: #172b4d;
+  --color-ink-secondary: #52627a;
+  --color-muted: #52627a;
+  --color-faint: #7a889e;
+  --color-disabled: #9aa6b5;
+
+  /* Brand cobalt & pale blue */
+  --color-brand: #315fe8;
+  --color-brand-hover: #254ed1;
+  --color-brand-strong: #254ed1;
+  --color-brand-soft: #eef4ff;
+  --color-brand-border: #d9e5fa;
+  --color-cyan: #22a6c7;
+  --color-cyan-soft: #e8f8fc;
+
+  /* Borders and dividers */
+  --color-border: #e2e8f0;
+  --color-border-strong: #cbd5e1;
+  --color-divider: #edf1f6;
+
+  /* Learning-status colors */
+  --color-strong: #16845b;
+  --color-strong-soft: #eaf7f0;
+  --color-developing: #a66a0a;
+  --color-developing-soft: #fff5de;
+  --color-weak: #c34848;
+  --color-weak-soft: #fff0f0;
+  --color-unassessed: #64748b;
+  --color-unassessed-soft: #f1f5f9;
+
+  /* Radii */
+  --radius-card: 0.875rem;
+  --radius-control: 0.5625rem;
+  --shadow-card: 0 1px 3px 0 rgb(23 43 77 / 0.04), 0 1px 2px -1px rgb(23 43 77 / 0.03);
+  --shadow-raised: 0 4px 14px -3px rgb(23 43 77 / 0.07), 0 2px 6px -2px rgb(23 43 77 / 0.03);
+  --shadow-focus: 0 0 0 3px rgb(49 95 232 / 0.18);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --focus-ring: 0 0 0 2px #ffffff, 0 0 0 4px rgb(49 95 232 / 0.4);
+  --glow-size: 200px;
+  --glow-strength: 0.5;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 160ms;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* --------------------------------------------------------------------------
+   Surfaces & academic recommendation cards
+   -------------------------------------------------------------------------- */
+.aurora-backdrop {
+  display: none !important;
+}
+
+/* Focus panel / highlight card: clean, academic pale blue surface with crisp border */
+.aurora-card,
+.academic-panel {
+  position: relative;
+  border: 1px solid var(--color-brand-border);
+  background: #ffffff;
+  box-shadow: var(--shadow-card);
+}
+
+/* Restrained accent text */
+.text-aurora {
+  color: var(--color-brand);
+  font-weight: inherit;
+}
+
+/* --------------------------------------------------------------------------
+   Buttons
+   -------------------------------------------------------------------------- */
+.btn-primary {
+  background-color: var(--color-brand);
+  color: #ffffff;
+}
+.btn-primary:hover {
+  background-color: var(--color-brand-hover);
+}
+
+/* --------------------------------------------------------------------------
+   Subtle cursor-following glow (optional, low opacity, restrained)
+   -------------------------------------------------------------------------- */
+[data-glow] {
+  position: relative;
+  isolation: isolate;
+  --gx: 50%;
+  --gy: 50%;
+}
+[data-glow]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-fast) var(--ease-out);
+  background: radial-gradient(
+    var(--glow-size) circle at var(--gx) var(--gy),
+    rgb(49 95 232 / 0.07),
+    transparent 65%
+  );
+}
+[data-glow="light"]::before {
+  background: radial-gradient(
+    120px circle at var(--gx) var(--gy),
+    rgb(255 255 255 / 0.22),
+    transparent 65%
+  );
+}
+[data-glow][data-glow-active]::before {
+  opacity: 1;
+}
+
+/* Restrained lift for interactive cards only */
+.lift {
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+.lift:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-raised);
+  border-color: var(--color-border-strong);
+}
+
+@media (hover: none) {
+  [data-glow]::before { display: none; }
+  .lift:hover { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-glow]::before { display: none; }
+  .lift, .lift:hover { transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
+}
+
+/* --------------------------------------------------------------------------
+   Long-form AI answers
+   -------------------------------------------------------------------------- */
+.prose-answer p { margin: 0.5rem 0; line-height: 1.6; }
+.prose-answer ul { list-style: disc; padding-left: 1.25rem; margin: 0.5rem 0; }
+.prose-answer ol { list-style: decimal; padding-left: 1.25rem; margin: 0.5rem 0; }
+.prose-answer strong { font-weight: 600; color: var(--color-ink); }
+.prose-answer code { background: var(--color-subtle); padding: 0.1rem 0.3rem; border-radius: 0.25rem; font-size: 0.88em; color: var(--color-ink); }
+
+/* Native <details> disclosure used for "Why?" explanations */
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
