@@ -35,6 +35,37 @@ export const tutorInput = z.object({
   topic_id: uuid.nullish(),
 });
 
+export const MAX_PROFILE_NAME_LENGTH = 100;
+
+export function validateProfileName(rawName: unknown): { valid: boolean; error?: string; name: string } {
+  if (typeof rawName !== "string") {
+    return { valid: false, error: "Name must be text.", name: "" };
+  }
+  const name = rawName.trim();
+  if (name.length === 0) {
+    return { valid: false, error: "Full name cannot be empty.", name: "" };
+  }
+  if (name.length > MAX_PROFILE_NAME_LENGTH) {
+    return {
+      valid: false,
+      error: `Full name cannot exceed ${MAX_PROFILE_NAME_LENGTH} characters.`,
+      name,
+    };
+  }
+  if (/[\u0000-\u001F\u007F]/.test(name)) {
+    return { valid: false, error: "Name contains invalid characters.", name: "" };
+  }
+  return { valid: true, name };
+}
+
+export const profileInput = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(1, "Full name cannot be empty")
+    .max(MAX_PROFILE_NAME_LENGTH, `Full name cannot exceed ${MAX_PROFILE_NAME_LENGTH} characters`),
+});
+
 export function safeFilename(name: string): string {
   const base = name.split(/[/\\]/).pop() ?? "";
   const cleaned = base.replace(/[^a-zA-Z0-9._-]+/g, "_").replace(/^\.+/, "").slice(-80);

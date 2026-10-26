@@ -1,5 +1,9 @@
+"use client";
+
 import { LogOut, Settings } from "lucide-react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { PROFILE_CHANGE_EVENT } from "@/components/account-profile-card";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +20,26 @@ export function Avatar({ name, className }: { name: string; className?: string }
 }
 
 /** Account row: name, settings link, sign out (a real POST form, works without JS). */
-export function AccountMenu({ name, email, compact }: { name: string; email: string | null; compact?: boolean }) {
+export function AccountMenu({ name: initialName, email, compact }: { name: string; email: string | null; compact?: boolean }) {
+  const [name, setName] = useState(initialName);
+  const [prevInitialName, setPrevInitialName] = useState(initialName);
+
+  if (prevInitialName !== initialName) {
+    setPrevInitialName(initialName);
+    setName(initialName);
+  }
+
+  useEffect(() => {
+    function onProfileChange(e: Event) {
+      const customEvent = e as CustomEvent<{ name?: string }>;
+      if (customEvent.detail?.name) {
+        setName(customEvent.detail.name);
+      }
+    }
+    window.addEventListener(PROFILE_CHANGE_EVENT, onProfileChange);
+    return () => window.removeEventListener(PROFILE_CHANGE_EVENT, onProfileChange);
+  }, []);
+
   return (
     <div className="flex items-center gap-1.5">
       <Avatar name={name} />

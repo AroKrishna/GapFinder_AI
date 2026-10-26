@@ -1,5 +1,6 @@
 import { ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
+import { AccountProfileCard } from "@/components/account-profile-card";
 import { BackLink } from "@/components/back-link";
 import { BrandingSettings } from "@/components/branding-settings";
 import { ThemeSelector } from "@/components/theme-selector";
@@ -7,7 +8,7 @@ import { Card, PageHeader } from "@/components/ui/primitives";
 import { requirePageUser } from "@/lib/services/auth";
 import { getDisplayName } from "@/lib/services/profile";
 
-export const metadata: Metadata = { title: "Settings & Branding" };
+export const metadata: Metadata = { title: "Settings & Profile" };
 
 export default async function AccountPage() {
   const { supabase, email, userId } = await requirePageUser();
@@ -18,11 +19,14 @@ export default async function AccountPage() {
       <BackLink href="/workspaces">My subjects</BackLink>
       <PageHeader
         eyebrow="Settings"
-        title="Settings &amp; Branding"
-        description="Configure your application identity, appearance, and profile details."
+        title="Settings &amp; Profile"
+        description="Configure your personal profile, application branding, and appearance preferences."
       />
 
       <div className="space-y-6">
+        {/* Account Profile Section (Editable full name, read-only email) */}
+        <AccountProfileCard initialName={name} email={email} />
+
         {/* Application Branding Section */}
         <Card className="p-5 sm:p-6">
           <div className="mb-4">
@@ -43,15 +47,6 @@ export default async function AccountPage() {
           <ThemeSelector />
         </Card>
 
-        {/* Account Details */}
-        <Card className="divide-y divide-border">
-          <div className="p-4 sm:px-5">
-            <h2 className="text-sm font-semibold text-ink">Account Profile</h2>
-          </div>
-          <Row label="Full Name" value={name} />
-          <Row label="Email Address" value={email ?? "—"} />
-        </Card>
-
         {/* Security & Isolation */}
         <Card className="flex gap-3 p-5">
           <ShieldCheck className="mt-0.5 size-5 shrink-0 text-strong" aria-hidden />
@@ -67,15 +62,6 @@ export default async function AccountPage() {
           </button>
         </form>
       </div>
-    </div>
-  );
-}
-
-function Row({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="grid gap-1 p-4 sm:grid-cols-[140px_1fr] sm:px-5">
-      <div className="text-xs font-semibold text-muted">{label}</div>
-      <div className="text-xs text-ink font-medium">{value}</div>
     </div>
   );
 }
