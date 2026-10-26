@@ -43,7 +43,7 @@ export function ThemeSelector({ className }: { className?: string }) {
     >
       {THEME_OPTIONS.map((opt) => {
         const Icon = opt.icon;
-        const isSelected = isMounted ? theme === opt.value : opt.value === "system";
+        const isSelected = isMounted ? theme === opt.value : opt.value === "light";
 
         return (
           <button

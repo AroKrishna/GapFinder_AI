@@ -4,12 +4,14 @@ import { Check, Copy, Eye, EyeOff, Loader2, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { useBranding } from "@/components/branding-provider";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/primitives";
 import { DEMO_CREDENTIALS } from "@/lib/core/demo";
 import { createClient } from "@/lib/supabase/client";
 
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
+  const { appName } = useBranding();
   const router = useRouter();
   const params = useSearchParams();
   const [email, setEmail] = useState("");
@@ -199,7 +201,7 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
           </>
         ) : (
           <>
-            New to GapFinder AI?{" "}
+            New to {appName}?{" "}
             <Link className="font-semibold text-brand hover:text-brand-hover" href="/signup">
               Create an account
             </Link>

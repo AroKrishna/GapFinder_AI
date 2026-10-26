@@ -51,7 +51,8 @@ function getSnapshot(): Theme {
       return val;
     }
   } catch {}
-  return "system";
+  // Default is Light Mode across the entire application
+  return "light";
 }
 
 function applyDomTheme(theme: Theme, resolved: ResolvedTheme) {
@@ -72,18 +73,20 @@ function applyDomTheme(theme: Theme, resolved: ResolvedTheme) {
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "light",
 }: {
   children: ReactNode;
   defaultTheme?: Theme;
 }) {
   const theme = useSyncExternalStore(subscribe, getSnapshot, () => defaultTheme);
 
-  // Compute resolved theme
+  // Compute resolved theme: Light Mode is strictly default unless dark is explicitly selected
+  // or user explicitly chose 'system' and their OS is dark.
   const resolvedTheme: ResolvedTheme = useMemo(() => {
     if (theme === "light") return "light";
     if (theme === "dark") return "dark";
-    return getSystemTheme();
+    if (theme === "system") return getSystemTheme();
+    return "light";
   }, [theme]);
 
   // Synchronize DOM classes whenever theme or system preference changes
@@ -91,7 +94,7 @@ export function ThemeProvider({
     applyDomTheme(theme, resolvedTheme);
   }, [theme, resolvedTheme]);
 
-  // Sync from server if no preference was set locally
+  // Sync from server if a preference was set on the user account
   useEffect(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);

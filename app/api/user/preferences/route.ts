@@ -37,6 +37,6 @@ export async function GET() {
       .eq("id", userId)
       .maybeSingle();
 
-    return { theme: (data as { theme?: string } | null)?.theme ?? "system" };
+    return { theme: (data as { theme?: string } | null)?.theme ?? "light" };
   });
 }

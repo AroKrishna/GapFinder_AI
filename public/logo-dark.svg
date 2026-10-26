@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 36" width="180" height="36" fill="none">
+  <defs>
+    <linearGradient id="logo-grad-dark" x1="2" y1="2" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#3b82f6" />
+      <stop offset="100%" stop-color="#1d4ed8" />
+    </linearGradient>
+    <linearGradient id="logo-spark-dark" x1="14" y1="6" x2="22" y2="18" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+  </defs>
+  <!-- Icon Mark -->
+  <rect x="2" y="2" width="32" height="32" rx="9" fill="url(#logo-grad-dark)" />
+  <circle cx="10.5" cy="21" r="2.5" fill="#ffffff" />
+  <circle cx="25.5" cy="21" r="2.5" fill="#ffffff" />
+  <path d="M 10.5 21 C 10.5 27, 25.5 27, 25.5 21" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none" />
+  <path d="M 18 24.5 V 19.5" stroke="#38bdf8" stroke-width="2.2" stroke-linecap="round" />
+  <path d="M 18 7.5 L 19.6 11.8 L 24 13.5 L 19.6 15.2 L 18 19.5 L 16.4 15.2 L 12 13.5 L 16.4 11.8 Z" fill="url(#logo-spark-dark)" />
+  
+  <!-- Wordmark -->
+  <text x="44" y="24" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-size="18" font-weight="700" letter-spacing="-0.02em" fill="#f1f5f9">GapFinder</text>
+  <text x="140" y="24" font-family="Plus Jakarta Sans, Inter, system-ui, sans-serif" font-size="18" font-weight="600" letter-spacing="-0.01em" fill="#60a5fa">AI</text>
+</svg>

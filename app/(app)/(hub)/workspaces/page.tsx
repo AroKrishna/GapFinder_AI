@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, CalendarDays, Clock, FlaskConical } from "lucide-
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SampleBadge } from "@/components/badges";
+import { BrandName } from "@/components/brand-name";
 import { Card, PageHeader } from "@/components/ui/primitives";
 import { requirePageUser } from "@/lib/services/auth";
 import { getDisplayName } from "@/lib/services/profile";
@@ -38,7 +39,7 @@ export default async function SubjectsPage() {
         <PageHeader
           eyebrow={`Welcome, ${name.split(" ")[0]}`}
           title="Select or create a subject to begin"
-          description="GapFinder AI tracks your knowledge gaps and prepares custom revision plans for each of your courses or exam targets."
+          description={<><BrandName /> tracks your knowledge gaps and prepares custom revision plans for each of your courses or exam targets.</>}
         />
         <div className="grid gap-5 md:grid-cols-2">
           <div className="flex flex-col rounded-[var(--radius-card)] border border-brand-border bg-brand-soft/50 p-6 shadow-sm">

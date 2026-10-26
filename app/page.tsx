@@ -1,4 +1,5 @@
 import { ArrowRight, BookOpen, CalendarCheck, ShieldCheck, Sparkles, Target } from "lucide-react";
+import { BrandName } from "@/components/brand-name";
 import { Logo } from "@/components/logo";
 import { LinkButton } from "@/components/ui/button";
 import { Card } from "@/components/ui/primitives";
@@ -44,7 +45,7 @@ export default function Landing() {
             <span className="text-brand">Focus your revision with evidence.</span>
           </h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-muted">
-            GapFinder AI analyzes your college notes and syllabus, identifies exactly which topics require practice through grounded quizzes, and builds an actionable daily study schedule.
+            <BrandName /> analyzes your college notes and syllabus, identifies exactly which topics require practice through grounded quizzes, and builds an actionable daily study schedule.
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <LinkButton href="/signup" size="lg">
@@ -60,7 +61,7 @@ export default function Landing() {
         </section>
 
         <section aria-labelledby="how-it-works-heading" className="mx-auto max-w-5xl px-4 pb-16 sm:px-6">
-          <h2 id="how-it-works-heading" className="sr-only">How GapFinder AI Works</h2>
+          <h2 id="how-it-works-heading" className="sr-only">How <BrandName /> Works</h2>
           <ol className="grid gap-5 md:grid-cols-3">
             {STEPS.map((s, i) => (
               <li key={s.title}>
@@ -105,7 +106,7 @@ export default function Landing() {
       </main>
 
       <footer className="border-t border-border bg-surface py-6 text-center text-xs text-faint">
-        GapFinder AI · Modern Academic Learning Platform
+        <BrandName /> · Modern Academic Learning Platform
       </footer>
     </div>
   );
